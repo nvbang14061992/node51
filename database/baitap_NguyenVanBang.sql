@@ -221,7 +221,7 @@ SELECT
 	`user`.full_name, 
 	COUNT(`rate_res`.user_id), 
 	COUNT(`rate_res`.amount), 
-	(`like_res`.res_id
+	`like_res`.res_id
 FROM `order`
 RIGHT JOIN `user` ON (`order`.user_id) = (`user`.user_id)
 LEFT JOIN `rate_res` ON (`rate_res`.user_id) = (`user`.user_id)

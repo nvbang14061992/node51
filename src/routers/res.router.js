@@ -12,7 +12,4 @@ resRouter.get("/", resController.getAllRestaurants);
 // lay danh sach like theo nha hang
 resRouter.get("/:restaurantId/likes", resController.getLikesByRestaurant);
 
-// lay danh sach unlike theo nha hang
-resRouter.get("/:restaurantId/unlikes", resController.getUnlikesByRestaurant);
-
 export default resRouter;
