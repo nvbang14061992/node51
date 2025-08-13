@@ -1,7 +1,7 @@
 import express from "express";
 import rootRouter from "./src/routers/root.router";
 import { appError } from "./src/common/app-error/app-error.error";
-import constants from "./src/common/constant/app.constant";
+import {PORT} from "./src/common/constant/app.constant";
 
 // npm i extensionless
 // khong can them duoi .js cho import modules
@@ -20,6 +20,6 @@ app.use("/api", rootRouter);
 
 app.use(appError);
 
-app.listen(constants.PORT, () => {
-    console.log(`Server is running on http://localhost:${constants.PORT}`
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`
 )});

@@ -1,4 +1,4 @@
-import { responseError } from "../../helpers/response.helper";
+import { responseError } from "../helpers/response.helper";
 
 export const appError = (err, req, res, next) => {
     const resData = responseError(err?.message, err?.code, err?.stack);

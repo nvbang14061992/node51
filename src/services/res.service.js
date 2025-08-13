@@ -1,5 +1,5 @@
 import prismaObj from "../common/prisma/init.prisma";
-import { BadRequestException, ForbiddenException, UnauthrozedException } from "../helpers/exception.helper";
+import { BadRequestException, ForbiddenException, UnauthrozedException } from "../common/helpers/exception.helper";
 import likeService from "./like.service";
 
 

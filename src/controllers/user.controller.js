@@ -1,5 +1,5 @@
 import userService from "../services/user.service";
-import { responseSuccess } from "../helpers/response.helper";
+import { responseSuccess } from "../common/helpers/response.helper";
 
 const userController = {
 
@@ -16,7 +16,7 @@ const userController = {
     //
     getLikesByUser: async (req, res, next) => {
         try {
-            const likes = await userService.getLikesByUser(req.params.userId);
+            const likes = await userService.getLikesByUser(req.user.user_id);
             const resData = responseSuccess(likes, "Likes retrieved successfully");
             res.status(resData.statusCode).json(resData);
         } catch (error) {

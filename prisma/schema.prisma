@@ -89,7 +89,7 @@ model sub_food {
 model user {
   user_id   Int        @id @default(autoincrement())
   full_name String?    @db.VarChar(255)
-  email     String?    @db.VarChar(255)
+  email     String     @unique(map: "email") @db.VarChar(255)
   password  String?    @db.VarChar(255)
   like_res  like_res[]
   order     order[]

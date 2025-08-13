@@ -2,6 +2,7 @@ import prismaObj from "../common/prisma/init.prisma";
 
 const likeService = {
     toggleLike: async () => {
+        console.log("Toggle like service called");
         // toggle like restaurant (like -> unlike or unlike -> like), via prisma with given u
         const likes = [];
         return likes;
