@@ -32,6 +32,7 @@ npm run dev
 ```
 > [!NOTE]
 > Please create local mysql database before run ```npm run prisma```, because this app is built as databasae-first approach, not model-first approach.
+
 > [!NOTE]
 > Protected endpoints need authorization to access data, thus please get accessToken first in auth service.
 
@@ -137,6 +138,7 @@ localhost:3000/api/auth/login
 #### user list to login
 > [!NOTE]
 > You can use data below to login.
+
 user_id| full_name|email|password
 ------|------|------|------|
 1	|Alice Smith|	alice@example.com|	pass123
