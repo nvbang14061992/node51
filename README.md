@@ -616,7 +616,7 @@ POST api/order/create-order
 }
 ```
 > [!TIP]
-> Use [get foods api](###2.6.1-get-foods) to get valid ```food_id```.
+> Use [get foods api](#261-get-foods) to get valid ```food_id```.
 > Use ```get subfoods api``` to get valid ```arr_sub_id```.
 
 #### response
