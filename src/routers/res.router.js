@@ -14,5 +14,6 @@ resRouter.get("/", resController.getAllRestaurants);
 
 // lay danh sach like theo nha hang
 resRouter.get("/:restaurantId/likes", resController.getLikesByRestaurant);
+resRouter.get("/:restaurantId/ratings", resController.getRatingsByRestaurant);
 
 export default resRouter;

@@ -1,6 +1,7 @@
 import prismaObj from "../common/prisma/init.prisma";
-import { BadRequestException, ForbiddenException, UnauthrozedException } from "../common/helpers/exception.helper";
+import { BadRequestException } from "../common/helpers/exception.helper";
 import likeService from "./like.service";
+import ratingService from "./rating.service";
 
 
 const resService = {
@@ -23,14 +24,21 @@ const resService = {
         // Fetching likes from a database via sequelize or prisma
         const likes = await likeService.getAllLikes();
         if (!likes || likes.length === 0) {
-            throw new BadRequestException("No likes found for this restaurant");
+            throw new BadRequestException("No likes data found");
         }
         const result = likes.filter(like => like.res_id === Number(restaurantId));
-        if (!result || result.length === 0) {
-            throw new BadRequestException("No likes found for this restaurant");
-        }
         return result;
-    }
+    },
+
+    getRatingsByRestaurant: async (restaurantId) => {
+        // Fetching likes from a database via sequelize or prisma
+        const rates = await ratingService.getAllRating();
+        if (!rates || rates.length === 0) {
+            throw new BadRequestException("No ratings data found");
+        }
+        const result = rates.filter(rate => rate.res_id === Number(restaurantId));
+        return result;
+    },
 }
 
 

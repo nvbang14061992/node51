@@ -29,9 +29,6 @@ const likeService = {
             });
             return {message: "Like added", like: newLike};
         }
-
-        const likes = [];
-        return likes;
     },
     
     getAllLikes: async () => {

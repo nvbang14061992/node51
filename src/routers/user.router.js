@@ -14,5 +14,6 @@ userRouter.get("/", userController.getAllUsers);
 
 // lay danh sach like theo user
 userRouter.get("/likes", userController.getLikesByUser);
+userRouter.get("/ratings", userController.getRatingsByUser);
 
 export default userRouter;
