@@ -36,6 +36,17 @@ const userController = {
             // move all error to appError middleware
             next(error);
         }
+    },
+
+    createNewOrder: async (req, res, next) => {
+        try {
+            const result = await userService.createNewOrder(req);
+            const resData = responseSuccess(result, "Order created successfully");
+            res.status(resData.statusCode).json(resData);
+        } catch (error) {
+            // move all error to appError middleware
+            next(error);
+        }
     }
 }
 

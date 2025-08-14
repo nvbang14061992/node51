@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "abc6bdb7-1370-403b-8e00-b575cda92cc2",
+		"name": "baitap_res_node51",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45698909",
+		"_collection_link": "https://www.postman.com/bang-4405084/workspace/node-51/collection/45698909-abc6bdb7-1370-403b-8e00-b575cda92cc2?action=share&source=collection_link&creator=45698909"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json();\r",
+									"\r",
+									"pm.globals.set(\"accessToken\", data.data.accessToken);\r",
+									"pm.globals.set(\"refreshToken\", data.data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jack@example.com\",\r\n    \"password\": \"pass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refesh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json();\r",
+									"\r",
+									"pm.globals.set(\"accessToken\", data.data.accessToken);\r",
+									"pm.globals.set(\"refreshToken\", data.data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessToken\": \"{{accessToken}}\",\r\n    \"refreshToken\": \"{{refreshToken}}\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/refresh-token",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user likes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/likes",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user ratings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/ratings",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "restaurant",
+			"item": [
+				{
+					"name": "get restaurants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resUrl}}/",
+							"host": [
+								"{{resUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get likes by restaurant id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resUrl}}/:id/likes",
+							"host": [
+								"{{resUrl}}"
+							],
+							"path": [
+								":id",
+								"likes"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ratings by restaurant id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{resUrl}}/:id/ratings",
+							"host": [
+								"{{resUrl}}"
+							],
+							"path": [
+								":id",
+								"ratings"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "like",
+			"item": [
+				{
+					"name": "toggle like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{likeUrl}}/toggle-like",
+							"host": [
+								"{{likeUrl}}"
+							],
+							"path": [
+								"toggle-like"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rating",
+			"item": [
+				{
+					"name": "create rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"amount\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rateUrl}}/create-rate",
+							"host": [
+								"{{rateUrl}}"
+							],
+							"path": [
+								"create-rate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "get foods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/foods",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"foods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subfoods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderUrl}}/subfoods",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"subfoods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"food_id\": 5,\r\n    \"arr_sub_id\": 2,\r\n    \"amount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderUrl}}/create-order",
+							"host": [
+								"{{orderUrl}}"
+							],
+							"path": [
+								"create-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "your base url",
+			"type": "string"
+		},
+		{
+			"key": "resUrl",
+			"value": "{{baseUrl}}/res",
+			"type": "string"
+		},
+		{
+			"key": "userUrl",
+			"value": "{{baseUrl}}/user",
+			"type": "string"
+		},
+		{
+			"key": "authUrl",
+			"value": "{{baseUrl}}/auth",
+			"type": "string"
+		},
+		{
+			"key": "likeUrl",
+			"value": "{{baseUrl}}/like",
+			"type": "string"
+		},
+		{
+			"key": "rateUrl",
+			"value": "{{baseUrl}}/rating",
+			"type": "string"
+		},
+		{
+			"key": "orderUrl",
+			"value": "{{baseUrl}}/order",
+			"type": "string"
+		}
+	]
+}

@@ -34,7 +34,7 @@ const userService = {
         }
         const result = ratings.filter(rate => rate.user_id === Number(userId));
         return result;
-    }
+    },
 }
 
 
