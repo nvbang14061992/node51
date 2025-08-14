@@ -26,8 +26,20 @@ REFRESH_TOKEN_EXPIRED_IN=1d
 
 
 ## 1.3 run
+### init prisma (run once)
+```terminal
+npx prisma init
+```
+
+### pull data from database by prisma
 ```terminal
 npm run prisma
+```
+> [!NOTE]
+> Re-run this if you have any change for tables' columns.
+
+### run backend app
+```terminal
 npm run dev
 ```
 > [!NOTE]
