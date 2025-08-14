@@ -32,6 +32,33 @@ npm run dev
 ```
 > [!NOTE]
 > Please create local mysql database before run ```npm run prisma```, because this app is built as databasae-first approach, not model-first approach.
+> [!NOTE]
+> Protected endpoints need authorization to access data, thus please get accessToken first in auth service.
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant AuthServer
+    participant ResourceServer
+
+    Note over Client, AuthServer: User logs in
+
+    Client->>AuthServer: POST /login (username, password)
+    AuthServer-->>Client: 200 OK (access_token, refresh_token)
+
+    Note over Client, ResourceServer: Access protected resource
+
+    Client->>ResourceServer: GET /data (Authorization: Bearer access_token)
+    ResourceServer-->>Client: 200 OK (data)
+
+    Note over Client: Access token expires
+
+    Client->>AuthServer: POST /refresh (refresh_token)
+    AuthServer-->>Client: 200 OK (new access_token)
+
+    Client->>ResourceServer: GET /data (Authorization: Bearer new access_token)
+    ResourceServer-->>Client: 200 OK (data)
+```
 
 # 2 API doc
 ## Check server
@@ -49,27 +76,6 @@ GET api/
 
 #### body
 ```None```
-
-### 2.2.1 - login
-#### endpoint:
-```api
-POST api/auth/login
-```
-#### Parameter
-|Parameter|Description|Example|
-|---------|-----------|-------|
-|None|None|None|
-
-
-#### header
-```None```
-
-#### body
-```None```
-#### response
-```
-"Check server working OK!!!"
-```
 ## 2.1 Auth
 ### 2.1.1 - register
 #### endpoint
@@ -87,7 +93,7 @@ POST api/auth/register
 #### body
 ```None```
 
-### 2.2.1 - login
+### 2.1.2 - login
 #### endpoint:
 ```api
 POST api/auth/login
@@ -144,7 +150,7 @@ user_id| full_name|email|password
 9	|Isla King|	isla@example.com|	pass123
 10	|Jack Green|	jack@example.com|	pass123
 
-### 2.3.1 - refesh token
+### 2.1.3 - refesh token
 #### endpoint:
 ```api
 POST api/auth/refresh-token
@@ -355,7 +361,7 @@ GET api/res/:id/ratings
 |id|restaurant id (integer) |3|
 
 > [!TIP]
-> Use ```get restaurants api``` to get valid id.
+> Use [get restaurants api](#231-get-restaurants) to get valid restaurantId.
 
 #### header
 |Header|Type|Description|
@@ -428,7 +434,7 @@ POST api/like/toggle-like
 }
 ```
 > [!TIP]
-> Use ```get restaurants api``` to get valid restaurantId.
+> Use [get restaurants api](#231-get-restaurants) to get valid restaurantId.
 
 #### response
 ***example***
@@ -478,7 +484,7 @@ POST api/rating/create-rate
 }
 ```
 > [!TIP]
-> Use ```get restaurants api``` to get valid restaurantId.
+> Use [get restaurants api](#231-get-restaurants) to get valid restaurantId.
 > Use integer for ```"amount"```
 
 #### response
@@ -542,7 +548,7 @@ None
 }
 ```
 
-### 2.6.3 get subfoods
+### 2.6.2 get subfoods
 #### endpoint:
 ```api
 GET api/order/subfoods
@@ -587,7 +593,7 @@ None
 }
 ```
 
-### 2.6.2 create new order
+### 2.6.3 create new order
 #### endpoint:
 ```api
 POST api/order/create-order
@@ -617,7 +623,7 @@ POST api/order/create-order
 ```
 > [!TIP]
 > Use [get foods api](#261-get-foods) to get valid ```food_id```.
-> Use ```get subfoods api``` to get valid ```arr_sub_id```.
+> Use [get subfoods api](#262-get-subfoods) to get valid ```arr_sub_id```.
 
 #### response
 ***example***
