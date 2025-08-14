@@ -616,7 +616,7 @@ POST api/order/create-order
 }
 ```
 > [!TIP]
-> Use [get foods api](### 2.6.1 get foods) to get valid ```food_id```.
+> Use [get foods api](# 2.6.1 get foods) to get valid ```food_id```.
 > Use ```get subfoods api``` to get valid ```arr_sub_id```.
 
 #### response
@@ -638,5 +638,5 @@ POST api/order/create-order
 ```
 
 > [!NOTE]
-> You can use export of postman collection in ```baitap_res_node51.postman_collection.json``` for testing api.
+> You can use export of postman collection in ```baitap_res_node51.postman_collection.json``` [Contribution guidelines for this project](baitap_res_node51.postman_collection.json) for testing api.
 > This export including some scripts and global variables for avoiding some rework of login, get tokens
