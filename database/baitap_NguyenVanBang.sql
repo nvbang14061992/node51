@@ -248,3 +248,19 @@ LEFT JOIN `like_res` ON `like_res`.user_id = `user`.user_id
 GROUP BY `user`.user_id, `user`.full_name
 ORDER BY order_num, rated_amount, liked_res_num ASC
 LIMIT 2
+
+-- add pk for order, like_res, rate_res
+ALTER TABLE `order`
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `like_res`
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `rate_res`
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `user`
+MODIFY email VARCHAR(255) NOT NULL UNIQUE;
+
+ALTER TABLE like_res
+MODIFY date_like TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
