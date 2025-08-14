@@ -39,26 +39,26 @@ npm run dev
 ```mermaid
 sequenceDiagram
     participant Client
-    participant AuthServer
-    participant ResourceServer
+    participant AuthService
+    participant ProtectedResources
 
-    Note over Client, AuthServer: User logs in
+    Note over Client, AuthService: User logs in
 
-    Client->>AuthServer: POST /login (username, password)
-    AuthServer-->>Client: 200 OK (access_token, refresh_token)
+    Client->>AuthService: POST /login (email, password)
+    AuthService-->>Client: 200 OK (access_token, refresh_token)
 
-    Note over Client, ResourceServer: Access protected resource
+    Note over Client, ProtectedResources: Access protected resource
 
-    Client->>ResourceServer: GET /data (Authorization: Bearer access_token)
-    ResourceServer-->>Client: 200 OK (data)
+    Client->>ProtectedResources: GET /data (Authorization: Bearer access_token)
+    ProtectedResources-->>Client: 200 OK (data)
 
     Note over Client: Access token expires
 
-    Client->>AuthServer: POST /refresh (refresh_token)
-    AuthServer-->>Client: 200 OK (new access_token)
+    Client->>AuthService: POST /refresh (refresh_token)
+    AuthService-->>Client: 200 OK (new access_token)
 
-    Client->>ResourceServer: GET /data (Authorization: Bearer new access_token)
-    ResourceServer-->>Client: 200 OK (data)
+    Client->>ProtectedResources: GET /data (Authorization: Bearer new access_token)
+    ProtectedResources-->>Client: 200 OK (data)
 ```
 
 # 2 API doc
