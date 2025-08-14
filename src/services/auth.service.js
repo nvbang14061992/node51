@@ -5,12 +5,38 @@ import prismaObj from "../common/prisma/init.prisma";
 
 
 export const authService = {
+    register: async (req) => {
+        const {full_name, email, password} = req.body;
+        if (!full_name || !email || !password) throw new BadRequestException("Full name or email or password missing!!!")
+        
+        const userExisting = await prismaObj.user.findUnique({
+            where: { 
+                email: email
+            }
+        });
+
+        if (userExisting) throw new BadRequestException("Email already used, please use other one!")
+
+        // encrypt password
+        const encryptPassword = bcrypt.hashSync(password, 10);
+
+        const newUser = await prismaObj.user.create({
+            data: {
+                full_name: full_name,
+                email: email,
+                password: encryptPassword
+            }
+        });
+
+        return newUser;
+    },
+
     login: async (req) => {
         const { email, password } = req.body;
         if (!email || !password) {
             throw new BadRequestException("Email and password are required");
         }
-        console.log({ email, password });
+        
         // fetch user from database
         const user = await prismaObj.user.findUnique({
             where: { 

@@ -11,6 +11,32 @@
 			"name": "auth",
 			"item": [
 				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Bang Nguyen\",\r\n    \"email\": \"BangN@example.com\",\r\n    \"password\": \"pass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/register",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"event": [
 						{
