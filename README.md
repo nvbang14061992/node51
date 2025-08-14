@@ -1,12 +1,13 @@
 # 1 - How to use
-Clone the repo to your local machine
+> [!NOTE]
+> Clone the repo to your local machine
 ## 1.1 set up
 ### install nodemodules
 ```bash
 npm i
 ```
 
-### prepare .evn file
+### prepare .env file
 ```properties
 DATABASE_URL=mysql://users:password@127.0.0.1:dockerPort/databaseName
 PORT=input_integer_port_here
@@ -16,9 +17,12 @@ REFRESH_TOKEN_SECRET=input_secret_for_refeshToken_here
 ACCESS_TOKEN_EXPIRED_IN=1d_or_10s
 REFRESH_TOKEN_EXPIRED_IN=1d
 ```
+> [!CAUTION]
+> If you use this repository for your own project, do not public ```.env```!!!
 
 ## 1.2 Prepare database
-Please use the ```\database\baitap_NguyenVanBang.sql``` file for create local database
+> [!NOTE]
+> Please use the ```\database\baitap_NguyenVanBang.sql``` file for create local database
 
 
 ## 1.3 run
@@ -26,7 +30,8 @@ Please use the ```\database\baitap_NguyenVanBang.sql``` file for create local da
 npm run prisma
 npm run dev
 ```
-**🚀 Note** Please create local mysql database before run ```npm run prisma```, because this app is built as databasae-first approach, not model-first approach.
+> [!NOTE]
+> Please create local mysql database before run ```npm run prisma```, because this app is built as databasae-first approach, not model-first approach.
 
 # 2 API doc
 ## Check server
@@ -102,8 +107,8 @@ localhost:3000/api/auth/login
 ```None```
 
 #### body
+***example***
 ```json
-example:
 {
     "email": "jack@example.com",
     "password": "pass123"
@@ -111,8 +116,8 @@ example:
 
 ```
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -124,6 +129,8 @@ example
 }
 ```
 #### user list to login
+> [!NOTE]
+> You can use data below to login.
 user_id| full_name|email|password
 ------|------|------|------|
 1	|Alice Smith|	alice@example.com|	pass123
@@ -161,8 +168,8 @@ example:
 
 ```
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -218,8 +225,8 @@ None
 ```
 
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -250,8 +257,8 @@ None
 ```
 
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -308,8 +315,8 @@ None
 ```
 
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -345,7 +352,10 @@ GET api/res/:id/ratings
 #### Path variable
 |Variable|Description|Example|
 |---------|-----------|-------|
-|id|restaurant id, use ```get restaurants``` endpoint to get valid ids|3|
+|id|restaurant id (integer) |3|
+
+> [!TIP]
+> Use ```get restaurants api``` to get valid id.
 
 #### header
 |Header|Type|Description|
@@ -358,8 +368,8 @@ None
 ```
 
 #### response
+***example***
 ```json
-example
 {
     "status": "success",
     "statusCode": 200,
@@ -390,13 +400,243 @@ example
 }
 ```
 
-
 ## 2.4 like
+### 2.4.1 toggle like
+#### endpoint:
+```api
+POST api/like/toggle-like
+```
+#### Parameter
+|Parameter|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### Path variable
+|Variable|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### header
+|Header|Type|Description|
+|---------|-----------|-------|
+|Authorization|Bearer Token|use accessToken|
+
+#### body
+```json
+{
+    "restaurantId": 1
+}
+```
+> [!TIP]
+> Use ```get restaurants api``` to get valid restaurantId.
+
+#### response
+***example***
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "Like toggled successfully",
+    "data": {
+        "message": "Like added",
+        "like": {
+            "user_id": 10,
+            "res_id": 1,
+            "date_like": "2025-08-14T16:14:07.000Z",
+            "id": 16
+        }
+    }
+}
+```
 
 ## 2.5 rating
+### 2.5.1 create rating
+#### endpoint:
+```api
+POST api/rating/create-rate
+```
+#### Parameter
+|Parameter|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### Path variable
+|Variable|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### header
+|Header|Type|Description|
+|---------|-----------|-------|
+|Authorization|Bearer Token|use accessToken|
+
+#### body
+```json
+{
+    "restaurantId": 1,
+    "amount": 5
+}
+```
+> [!TIP]
+> Use ```get restaurants api``` to get valid restaurantId.
+> Use integer for ```"amount"```
+
+#### response
+***example***
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "You have already rated this restaurant",
+    "data": null
+}
+```
 
 ## 2.6 order
+### 2.6.1 get foods
+#### endpoint:
+```api
+GET api/order/foods
+```
+#### Parameter
+|Parameter|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
 
-Some body text of this section.
+
+#### header
+|Header|Type|Description|
+|---------|-----------|-------|
+|Authorization|Bearer Token|use accessToken|
+
+#### body
+```json
+None
+```
+#### response
+***example***
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "Get all foods successfully",
+    "data": [
+        {
+            "food_id": 1,
+            "food_name": "Spaghetti Carbonara",
+            "image": "carbonara.jpg",
+            "price": 12.99,
+            "descr": "Classic Italian pasta",
+            "type_id": 1
+        },
+        {
+            "food_id": 2,
+            "food_name": "Cheeseburger",
+            "image": "cheeseburger.jpg",
+            "price": 9.49,
+            "descr": "Beef patty with cheese",
+            "type_id": 2
+        },
+        ...
+    ]
+}
+```
+
+### 2.6.3 get subfoods
+#### endpoint:
+```api
+GET api/order/subfoods
+```
+#### Parameter
+|Parameter|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+
+#### header
+|Header|Type|Description|
+|---------|-----------|-------|
+|Authorization|Bearer Token|use accessToken|
+
+#### body
+```json
+None
+```
+#### response
+***example***
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "Get all foods successfully",
+    "data": [
+        {
+            "sub_id": 1,
+            "sub_name": "Extra Cheese",
+            "sub_price": 1.5,
+            "food_id": 1
+        },
+        {
+            "sub_id": 2,
+            "sub_name": "Avocado Topping",
+            "sub_price": 2,
+            "food_id": 4
+        },
+        ...
+    ]
+}
+```
+
+### 2.6.2 create new order
+#### endpoint:
+```api
+POST api/order/create-order
+```
+#### Parameter
+|Parameter|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### Path variable
+|Variable|Description|Example|
+|---------|-----------|-------|
+|None|None|None|
+
+#### header
+|Header|Type|Description|
+|---------|-----------|-------|
+|Authorization|Bearer Token|use accessToken|
+
+#### body
+```json
+{
+    "food_id": 5,
+    "arr_sub_id": 2,
+    "amount": 10
+}
+```
+> [!TIP]
+> Use [get foods api](### 2.6.1 get foods) to get valid ```food_id```.
+> Use ```get subfoods api``` to get valid ```arr_sub_id```.
+
+#### response
+***example***
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "Order created successfully",
+    "data": {
+        "user_id": 10,
+        "food_id": 5,
+        "amount": 10,
+        "code": "ORD2046638",
+        "arr_sub_id": "2",
+        "id": 28
+    }
+}
+```
+
 > [!NOTE]
-> Useful information that users should know, even when skimming content.
+> You can use export of postman collection in ```baitap_res_node51.postman_collection.json``` for testing api.
+> This export including some scripts and global variables for avoiding some rework of login, get tokens
